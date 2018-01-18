@@ -1,0 +1,50 @@
+/*making the marging and padding 0*/
+* {
+	margin: 0;
+	padding: 0;
+}
+/*adding a background to the body of the page*/
+body {
+	background-image: url("../img/mountainBackground.jpg");
+	background-size: contain;
+}
+/*adjusting the size of the snowboard images*/
+.img-responsive {
+	max-height: 200px;
+	max-width: 200px;
+	object-fit: cover;
+	margin: 30px;
+}
+/*changing the display of the div colums*/
+.col-sm-4 {
+	display: inline-block;
+	min-width: 338px;
+	min-height: 486px;
+}
+/*changing the appearence of the price h5 tag*/
+.priceH5 {
+	color: #009933;
+}
+/*adding a border and margin to the div wrapping the snowboard info*/
+.boardWrap {
+	border: 1px solid #000;
+	margin: 10px;
+	width: inherit;
+	background-color: #fff;
+	opacity: .90;
+
+}
+/*adding some margin the button*/
+.btn {
+	margin: 10px;
+}
+.btn:hover {
+	cursor: pointer;
+}
+/*styling the heading of the page*/
+.galleryHeading {
+	color: hsl(0, 0%, 95%);
+	font-size: 70px;
+	text-shadow: -3px 5px 5px #000;
+	font-family: 'Ruslan Display', cursive;
+}
