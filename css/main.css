@@ -3,9 +3,44 @@
 	margin: 0;
 	padding: 0;
 }
-/*adding a background to the body of the page*/
-body {
+/*making the nav bar fixed*/
+.navbar {
+	position: fixed;
+	width: 100vw;
+	height: 7vh;
+	top: 0;
+	z-index: 999;
+}
+/*the color class on the navbar in bootstrap and adding a border*/
+.bg-light {
+	border-bottom: 1px solid #ccc;
+	opacity: .97;
+}
+/*giving the main content some padding so the nav bar doesn't cover it*/
+#mainContent{
+	padding-top: 7vh; 
+}
+/*making a white text class with text shadow*/
+.white-text a {
+	padding-top: 25px;
+	color: #fff !important;
+	text-shadow: 2px 2px 20px #000;
+}
+/*Making the text overflow not wrap*/
+.ellipsis {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: inherit;
+	overflow: hidden;
+	padding: 0 20px;
+}
+#mainContent {
 	background-image: url("../img/mountainBackground.jpg");
+	background-size: contain;
+}
+/*adding a background to the body of the page*/
+.snowboard-wrap {
+	background-image: url("../img/abstractRepeat.jpg");
 	background-size: contain;
 }
 /*adjusting the size of the snowboard images*/
@@ -28,11 +63,10 @@ body {
 /*adding a border and margin to the div wrapping the snowboard info*/
 .boardWrap {
 	border: 1px solid #000;
-	margin: 10px;
+	margin-bottom: 20px;
 	width: inherit;
 	background-color: #fff;
-	opacity: .90;
-
+	opacity: .97;
 }
 /*adding some margin the button*/
 .btn {
@@ -44,7 +78,57 @@ body {
 /*styling the heading of the page*/
 .galleryHeading {
 	color: hsl(0, 0%, 95%);
-	font-size: 70px;
-	text-shadow: -3px 5px 5px #000;
+	font-size: 10vh;
+	text-shadow: 3px 5px 50px #000;
 	font-family: 'Ruslan Display', cursive;
+	text-align: center;
 }
+.show-more {
+	display: block;
+	background-color: #fff;
+	border-radius: 10px;
+	width: 40%;
+	margin: 0 30%;
+}
+.show-more:hover {
+	color: #fff;
+	cursor: pointer;
+	box-shadow: -2px 2px 15px #000;
+	text-shadow: -2px 2px 3px #000;
+}
+/*-----------------------------------------------------------
+=============Media Queries================================
+-----------------------------------------------------------*/
+/*Ipad Pro*/
+@media (max-width: 1024px) {
+	.galleryHeading {
+		font-size: 5vh;
+	}
+	
+}
+/*Navbar Collapse*/
+@media (max-width: 575px) {
+	.col-sm-4 {
+		min-width: 0;
+	}
+	.navbar-expand-sm {
+		background-color: #f8f9fa!important;
+		border-bottom: 1px solid #ccc;
+	}
+	nav.navbar-expand-sm a {
+		padding-top: 0;
+		color: #000 !important;
+		text-shadow: none;
+	}
+	#navbarNavAltMarkup {
+		border-radius: 10px;
+		border: 1px solid #ccc;
+		background-color: #fff;
+		text-align: center;
+		opacity: .99;
+	}
+	#navbarNavAltMarkup a {
+		padding-right: 0 !important;
+		padding-top: 10px;
+	}
+} 
