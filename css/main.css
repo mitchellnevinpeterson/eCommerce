@@ -3,6 +3,22 @@
 	margin: 0;
 	padding: 0;
 }
+/*Font Ruslan Display*/
+.font-ruslan {
+	/*color: hsl(0, 0%, 95%);*/
+	text-shadow: 3px 5px 20px #333;
+	font-family: 'Ruslan Display', cursive;
+	text-align: center;
+}
+/*class with a background color white and a opacity*/
+.bg-white-opacity {
+	background-color: rgba(255, 255, 255, 0.8);
+}
+.heading-wrap {
+	width: 80%;
+	border-radius: 10px;
+	margin: 0 10%;
+}
 /*making the nav bar fixed*/
 .navbar {
 	position: fixed;
@@ -10,6 +26,10 @@
 	height: 7vh;
 	top: 0;
 	z-index: 999;
+}
+/*making a class to add a box shadow to any image by adding this class*/
+.box-shad {
+	box-shadow: -10px 10px 30px #000;
 }
 /*the color class on the navbar in bootstrap and adding a border*/
 .bg-light {
@@ -24,7 +44,7 @@
 .white-text a {
 	padding-top: 25px;
 	color: #fff !important;
-	text-shadow: 2px 2px 20px #000;
+	text-shadow: 2px 2px 20px #333;
 }
 /*Making the text overflow not wrap*/
 .ellipsis {
@@ -77,20 +97,38 @@
 }
 /*styling the heading of the page*/
 .galleryHeading {
-	color: hsl(0, 0%, 95%);
+	/*color: hsl(0, 0%, 95%);*/
 	font-size: 10vh;
-	text-shadow: 3px 5px 50px #000;
+	text-shadow: 3px 5px 70px #333;
 	font-family: 'Ruslan Display', cursive;
 	text-align: center;
 }
-.show-more {
+#itemNum {
 	display: block;
 	background-color: #fff;
 	border-radius: 10px;
-	width: 40%;
-	margin: 0 30%;
+	width: 30%;
+}
+.show-more {
+	display: inline-block;
+	background-color: #fff;
+	border-radius: 10px;
+	width: 30%;
 }
 .show-more:hover {
+	color: #fff;
+	cursor: pointer;
+	box-shadow: -2px 2px 15px #000;
+	text-shadow: -2px 2px 3px #000;
+}
+.nav-btn {
+	display: inline-block;
+	background-color: #fff;
+	border-radius: 10px;
+	width: 15%;
+	margin: 0 20px;
+}
+.nav-btn:hover {
 	color: #fff;
 	cursor: pointer;
 	box-shadow: -2px 2px 15px #000;
@@ -131,4 +169,13 @@
 		padding-right: 0 !important;
 		padding-top: 10px;
 	}
+	.w-75 {
+		width: 100vw !important;
+		border-bottom: 2px solid #000;
+		border-top: 2px solid #000;
+	}
+	.heading-wrap {
+	width: 100%;
+	margin: 0;
+}
 } 

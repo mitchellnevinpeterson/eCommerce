@@ -34,27 +34,175 @@ var arborWood = new newSnowboard("Arbor", "Wasteland System Rocker Snowboard", "
 var arborTree = new newSnowboard("Arbor", "Bryan Iguchi Pro Camber Snowboard", "Men's", "2017/2018", "$599.00", "img/arborTree.jpeg")
 var nicheBlack = new newSnowboard("NICHE", "Story Snowboard", "Men's", "2017/2018", "$579.00", "img/nicheBlack.jpeg")
 var nicheGrey = new newSnowboard("NICHE", "Minx Snowboard", "Women's", "2017/2018", "$419.00", "img/nicheGrey.png")
+var capitaWhite = new newSnowboard("CAPiTA", "Mercury Snowboard", "Uni-Sex", "2019", "$549.95", "img/capitaMercury.jpg")
+var arborTerrapin = new newSnowboard("Arbor", "Terrapin Snowboard", "Uni-Sex", "2019", "$499.99", "img/arborTerrapin.jpg")
 // creating the empty array
 var snowboardArray = []
 // Pushing all the objects into the array
 snowboardArray.push(jonesGreen, burtonBlue, jonesWood, jonesPurple, libColorful, arborWood, arborTree, nicheBlack, nicheGrey)
-console.log(snowboardArray)
+snowboardArray.push(capitaWhite)
+snowboardArray.push(arborTerrapin)
 
 // Setting a variable base line for the index increasing by 6
 var indexUpSix = 0
+
 // Showing 6 snowboards at a time and 6 more when clicking show more button
 function showMore() {
+	document.getElementById("itemNum").innerHTML = ""
 	document.getElementById("snowboards").innerHTML = ""
 	indexUpSix += 6
-	console.log(indexUpSix)
-	console.log(snowboardArray.length)
-	if(indexUpSix > snowboardArray.length) {
-		indexUpSix = snowboardArray.length
-	}
-	console.log(indexUpSix)
+	var length = snowboardArray.length
 
+	if(indexUpSix > length) {
+		indexUpSix = length
+	}
+	// showing the number of items showing per page
+	document.getElementById("itemNum").innerHTML = "<p class='m-2'>" + indexUpSix + " of " + length + "</p>"
 	// creating the for loop that goes through the array and creates the elements to hold the infomation in the objects
 	for(var i = 0; i < indexUpSix; i++) {
+	// creating the new elments to hold the information from the objects created above
+	var newCol = document.createElement("div")
+	var newDiv = document.createElement("div")
+	var snowboardImg = document.createElement("img")
+	var brandH4 = document.createElement("h4")
+	var nameH5 = document.createElement("h5")
+	var sexH6 = document.createElement("h6")
+	var yearH6 = document.createElement("h6")
+	var priceH5 = document.createElement("h5")
+	var buyButton = document.createElement("button")
+	// creating the text nodes that go into the elements above
+	var srcImage = snowboardArray[i].image
+	console.log(srcImage)
+	var txtBrand = document.createTextNode(snowboardArray[i].brand)
+	var txtName = document.createTextNode(snowboardArray[i].name)
+	var txtSex = document.createTextNode(snowboardArray[i].sex)
+	var txtYear = document.createTextNode(snowboardArray[i].year)
+	var txtPrice = document.createTextNode(snowboardArray[i].price)
+	var txtButton = document.createTextNode("Add To Cart")
+	// putting the text into the elements created above
+	snowboardImg.src = srcImage
+	brandH4.appendChild(txtBrand)
+	nameH5.appendChild(txtName)
+	sexH6.appendChild(txtSex)
+	yearH6.appendChild(txtYear)
+	priceH5.appendChild(txtPrice)
+	buyButton.appendChild(txtButton)
+	// adding classes to the elements that need them
+	buyButton.className = "btn btn-outline-secondary btn-lg"
+	snowboardImg.className = "img-responsive"
+	newCol.className = "col-sm-4"
+	priceH5.className = "priceH5"
+	newDiv.className = "boardWrap"
+	newDiv.appendChild(snowboardImg)
+	newDiv.appendChild(brandH4)
+	newDiv.appendChild(nameH5)
+	newDiv.appendChild(sexH6)
+	newDiv.appendChild(yearH6)
+	newDiv.appendChild(priceH5)
+	newDiv.appendChild(buyButton)
+	newCol.appendChild(newDiv)
+	snowboards.appendChild(newCol)
+	// Adding the ellipsis css to the h5 when the name is too long
+	nameH5.classList.add("ellipsis")
+	nameH5.setAttribute("onclick", "showText()")
+	}
+}
+var i = 0
+// Showing 6 snowboards at a time and 6 more when clicking show more button
+function nextBtn() {
+	document.getElementById("backBtn"). innerHTML = "<p class='m-2'><i class='fa fa-angle-double-left'></i> Back</p>"
+	document.getElementById("showMore").innerHTML = ""
+	document.getElementById("itemNum").innerHTML = ""
+	document.getElementById("snowboards").innerHTML = ""
+	indexUpSix += 6
+	var length = snowboardArray.length
+	
+	if(indexUpSix > length) {
+			indexUpSix = length
+		}
+
+	// showing the number of items showing per page
+	document.getElementById("itemNum").innerHTML = "<p class='m-2'>" + indexUpSix + " of " + length + "</p>"
+
+	i += 6
+	if(i >= length) {
+		i = length - 6
+	}
+	
+	// creating the for loop that goes through the array and creates the elements to hold the infomation in the objects
+	for(i; i < indexUpSix; i++) {
+	// creating the new elments to hold the information from the objects created above
+	var newCol = document.createElement("div")
+	var newDiv = document.createElement("div")
+	var snowboardImg = document.createElement("img")
+	var brandH4 = document.createElement("h4")
+	var nameH5 = document.createElement("h5")
+	var sexH6 = document.createElement("h6")
+	var yearH6 = document.createElement("h6")
+	var priceH5 = document.createElement("h5")
+	var buyButton = document.createElement("button")
+	// creating the text nodes that go into the elements above
+	var srcImage = snowboardArray[i].image
+	console.log(srcImage)
+	var txtBrand = document.createTextNode(snowboardArray[i].brand)
+	var txtName = document.createTextNode(snowboardArray[i].name)
+	var txtSex = document.createTextNode(snowboardArray[i].sex)
+	var txtYear = document.createTextNode(snowboardArray[i].year)
+	var txtPrice = document.createTextNode(snowboardArray[i].price)
+	var txtButton = document.createTextNode("Add To Cart")
+	// putting the text into the elements created above
+	snowboardImg.src = srcImage
+	brandH4.appendChild(txtBrand)
+	nameH5.appendChild(txtName)
+	sexH6.appendChild(txtSex)
+	yearH6.appendChild(txtYear)
+	priceH5.appendChild(txtPrice)
+	buyButton.appendChild(txtButton)
+	// adding classes to the elements that need them
+	buyButton.className = "btn btn-outline-secondary btn-lg"
+	snowboardImg.className = "img-responsive"
+	newCol.className = "col-sm-4"
+	priceH5.className = "priceH5"
+	newDiv.className = "boardWrap"
+	newDiv.appendChild(snowboardImg)
+	newDiv.appendChild(brandH4)
+	newDiv.appendChild(nameH5)
+	newDiv.appendChild(sexH6)
+	newDiv.appendChild(yearH6)
+	newDiv.appendChild(priceH5)
+	newDiv.appendChild(buyButton)
+	newCol.appendChild(newDiv)
+	snowboards.appendChild(newCol)
+	// Adding the ellipsis css to the h5 when the name is too long
+	nameH5.classList.add("ellipsis")
+	nameH5.setAttribute("onclick", "showText()")
+	}
+	return i
+}
+
+function backBtn() {
+	var i = nextBtn()
+	console.log(i)
+	document.getElementById("showMore").innerHTML = ""
+	document.getElementById("snowboards").innerHTML = ""
+	indexUpSix -= 6
+	var length = snowboardArray.length
+
+	if(indexUpSix > length) {
+		indexUpSix = length
+	}
+	
+	i -= 6
+	if(i < 6) {
+		i = 0
+		indexUpSix = 6
+		document.getElementById("showMore").innerHTML = "<p class='m-0'>Show More</p><p><i class='fa fa-3x fa-angle-double-down'></i></p>"
+	}
+	// showing the number of items showing per page
+	document.getElementById("itemNum").innerHTML = "<p class='m-2'>" + indexUpSix + " of " + length + "</p>"
+	
+	// creating the for loop that goes through the array and creates the elements to hold the infomation in the objects
+	for(i; i < indexUpSix; i++) {
 	// creating the new elments to hold the information from the objects created above
 	var newCol = document.createElement("div")
 	var newDiv = document.createElement("div")
@@ -105,7 +253,6 @@ function showMore() {
 // showing the hidden text by targeting the element that has been clicked on and removing the class of ellipsis
 function showText() {
 		var target = event.target
-		console.log(target)
 		target.classList.remove("ellipsis")
 		
 	}
