@@ -6,7 +6,7 @@
     <!-- Responsive Web Page Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
-    <title></title>
+    <title>SnowBoard Gallery</title>
     <!-- Boot Strap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <!-- Animate Stylesheet -->
@@ -14,7 +14,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Ruslan+Display" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!-- Reset CSS -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- Custom Main CSS -->
@@ -24,18 +24,53 @@
   <body>
     <!-- Navagation bar -->
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
-      <a class="navbar-brand pl-3" href="#"><i class="fa fa-user"></i> Profile</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <a id="logo" class="navbar-brand pl-3 font-ruslan">Shred</a>
+      <button class="navbar-toggler" onclick="showDropMenu()" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <div id="nav-icon1">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link active pr-5" href="#">Home</a>
-          <a class="nav-item nav-link active pr-5" href="#"><i class="fa fa-shopping-cart"></i> Cart</a>
-          <a class="nav-item nav-link active pr-5" href="#">Sell Your Board</a>
+          <a id="home" class="nav-item nav-link active pr-5" href="#" onclick="hideDropMenu(), home()">Home</a>
+          <a id="cart" class="nav-item nav-link active pr-5" onclick="showCart(), hideDropMenu()"><i class="fa fa-shopping-cart"></i> Cart</a>
+          <a id="sell" class="nav-item nav-link active pr-5" href="#" onclick="hideDropMenu(), sellForm()">Sell Your Board</a>
         </div>
       </div>
     </nav><!-- End of Nav -->
+    <!-- Sell your board section -->
+    <section id="sellBoard" class="text-center hide">
+        <i class="animated bounce fas fa-chevron-circle-up fa-3x" onclick="hide('sellBoard')"></i>
+        <h2>Give us some info on your board.</h2>
+        <p>required field *</p>
+        <form>
+            <label id="brand" class="d-block mt-3 mb-0"><b>Brand *</b></label>
+                <input id="brandSell" class="d-block mx-auto text-center" type="text" name="Brand">
+            <label id="board" class="d-block mt-3 mb-0"><b>Board Name *</b></label>
+                <input id="boardSell" class="d-block mx-auto text-center" type="text" name="Board Name">
+            <label id="gender" class="d-block mt-3 mb-0"><b>Gender of Board *</b></label>
+                <select id="genderSell" class="d-block mx-auto">
+                    <option class="gender" value="Men's">Men's</option>
+                    <option class="gender" value="Women's">Women's</option>
+                    <option class="gender" value="Uni-Sex">Uni-Sex</option>
+                </select>
+            <label id="year" class="d-block mt-3 mb-0"><b>Year of Board *</b></label>
+                <p id="formatYear"><em>In 4 digit format</em></p>
+                <input id="yearSell" class="d-block mx-auto text-center" type="number" min="1800" name="Year">
+            <label id="price" class="d-block mt-3 mb-0"><b>Price *</b></label>
+                <input id="priceSell" class="d-block mx-auto text-center" type="number" min="1" name="Price">
+            <label class="d-block mt-3 mb-0"><b>Image of Board</b></label>
+                <input id="imgSell" class="d-block mx-auto mb-3 text-center" type="text" name="Image" placeholder="www.exampleURL.com/image">
+            <p class="d-block mt-0 mb-0 pr-5 pl-5"><em>This must be a url to an image online because this page contains no PHP.</em></p>
+            <p class="d-block mt-0 mb-0 pr-5 pl-5"><em>You may also leave image section blank.</em></p>
+            <button type="button" onclick="sellPost()" class="btn btn-primary">Sell Your Board</button>
+            <div id="requiredFields"></div>
+            <i class="animated bounce fas fa-chevron-circle-up fa-3x" onclick="hide('sellBoard')"></i>
+        </form>
+    </section>
     <!-- Main Content -->
     <main id="mainContent">
         <!-- Headings -->
@@ -65,6 +100,12 @@
             <span class="sr-only">Next</span>
           </a>
         </div><!-- End of Carousel -->
+
+        <!-- The shopping cart of the snowboards user has selected -->
+                <div id="shoppingCart" class="hide">
+                    <!-- Cart populated by function in JS -->
+                </div>
+
         <!-- Snowboard Content -->
         <div class="snowboard-wrap pt-5 pb-3">
             <!-- container -->
@@ -72,16 +113,19 @@
                 <div class="bg-white-opacity heading-wrap">
                     <h2 class="font-ruslan pt-2 pb-3">SnowBoard Gallery</h2>
                 </div>
+                
+                <!-- List of available snowboards -->
                 <div id="snowboards">
                     <!-- Snowboards populated by JS -->
                 </div>
 
+                <!-- the amount of items the user is viewing -->
                 <div id="itemNum" class="mx-auto"></div>
 
                 <!-- Back Btn -->
-                <div id="backBtn" class="nav-btn" onclick="backBtn()">
+                <!-- <div id="backBtn" class="nav-btn" onclick="backBtn()">
                     <p class="m-2"><i class="fa fa-angle-double-left"></i> Back</p>
-                </div><!-- End of Back -->
+                </div> --><!-- End of Back -->
 
                 <!-- Show More Btn -->
                 <div id="showMore" class="show-more" onclick="showMore()">
@@ -90,9 +134,9 @@
                 </div><!-- End of Showmore -->
 
                 <!-- Next Btn -->
-                <div class="nav-btn" onclick="nextBtn()">
+                <!-- <div class="nav-btn" onclick="nextBtn()">
                     <p class="m-2">Next <i class="fa fa-angle-double-right"></i></p>
-                </div><!-- End of Next -->
+                </div> --><!-- End of Next -->
 
             </div><!-- End of Container -->
         </div><!-- End of Snowboard Content -->
