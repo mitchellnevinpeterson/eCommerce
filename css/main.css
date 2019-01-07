@@ -382,7 +382,7 @@ section {
 	}
 
 	#shoppingCart p:nth-child(1) {
-	padding-top: 50px;
+	padding: 50px 10px 0 10px;
 	height: 80px;
 	text-align: center;
 	}
