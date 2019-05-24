@@ -49,9 +49,6 @@ var indexUpSix = 6
 
 // selling your own board
 function sellPost() {
-	// clearing the snowboards to refresh and allowing the newly added board to appear first
-	document.getElementById("snowboards").innerHTML = ""
-
 	var brandSell = document.getElementById("brandSell").value
 	var boardSell = document.getElementById("boardSell").value
 	var genderSellOption = document.getElementById("genderSell").selectedIndex
@@ -100,6 +97,8 @@ function sellPost() {
 		return
 	}
 
+	// clearing the snowboards to refresh and allowing the newly added board to appear first
+	document.getElementById("snowboards").innerHTML = ""
 
 	var userBoardSell = new newSnowboard(brandSell, boardSell, genderSell, yearSell, priceSell, imageSell)
 
@@ -189,62 +188,100 @@ function showMore() {
 var cart = []
 var priceInCart = []
 
+function clearCart() {
+	var confirmClear = confirm("Are you sure you want to clear your cart?")
+	if(confirmClear == false) {
+		return
+	}
+	hide("shoppingCart")
+	cart.splice(0, cart.length)
+	priceInCart.splice(0, priceInCart.length)
+	addToCart()
+	console.log(cart)
+}
+
 function addToCart() {
 	shoppingCart.innerHTML = ""
 	var targetEle = event.target
-	var priceStr = targetEle.parentElement.getElementsByClassName("priceH5")[0].innerText
-	priceStr = priceStr.replace("$", "").replace(",", "")
-	
-	priceInCart.push(Number(priceStr))
-	
-	var boardToCart = targetEle.parentElement.innerHTML
-	targetEle.innerText = "Item Added"
-	targetEle.setAttribute("onclick", "")
-	cart.push(boardToCart)
-	
-	// creating the function to use in the reduce method
-	function add(a, b) {
-		return a + b
-	}
 
-	// using reduce to get the sum of the cart array and then using toLocalString to add in commas when over a thousand
-	var total = priceInCart.reduce(add, 0).toLocaleString("en", {minimumFractionDigits: 2})
-	
+	// stopping the function if the target elelment isn't add to cart button
+	if(targetEle.innerText === "Add To Cart" || "Item Added") {
 
-	console.log(total)
-
-	// showing the number of items in users shopping cart
-	var numItems = document.createElement("p")
-	numItems.innerHTML = "Your cart has " + cart.length + " items in it! <i class='fas fa-chevron-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
-	if(cart.length == 1) {
-		numItems.innerText = ""
-		numItems.innerHTML = "Your cart has " + cart.length + " item in it! <i class='fas fa-chevron-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
-	}
-	shoppingCart.appendChild(numItems)
-
-	// if the cart has at least one item in it then show the price total
-	if(cart.length >= 1) {
-		var priceWrap = document.createElement("div")
-		priceWrap.style.width = "100%"
-		priceWrap.style.height = "50px"
-		priceWrap.style.borderBottom = "1px solid black"
-		var priceTotal = document.createElement("h5")
-		priceTotal.id = "cartTotal"
-		priceTotal.style.paddingTop = "10px"
-		priceTotal.style.textAlign = "center"
-		priceTotal.style.width = "100%"
-		shoppingCart.appendChild(priceWrap)
-		priceWrap.appendChild(priceTotal)
-		priceTotal.innerText = "Total = $" + total
+		console.log(targetEle.innerText)
+		var priceStr = targetEle.parentElement.getElementsByClassName("priceH5")[0].innerText
+		priceStr = priceStr.replace("$", "").replace(",", "")
 		
-	}
-	
-	// a for loop to add the board to the cart
-	for(var i = 0; i < cart.length; i++) {
-		var newBoardCart = document.createElement("div")
-		newBoardCart.classList.add("board-cart")
-		newBoardCart.innerHTML = cart[i]
-		shoppingCart.appendChild(newBoardCart)
+		priceInCart.push(Number(priceStr))
+		
+		var boardToCart = targetEle.parentElement.innerHTML
+		targetEle.innerText = "Item Added"
+		setTimeout(function(){targetEle.innerText = "Add To Cart"}, 650)
+		// targetEle.setAttribute("onclick", "")
+		cart.push(boardToCart)
+		
+		// creating the function "add" to use in the reduce method below which will add all the prices together
+		function add(a, b) {
+			return a + b
+		}
+
+		// using reduce to get the price sum of the cart array and then using toLocalString to add in commas when over a thousand
+		var total = priceInCart.reduce(add, 0).toLocaleString("en", {minimumFractionDigits: 2})
+		
+
+		console.log(total)
+
+		// showing the number of items in users shopping cart
+		var numItems = document.createElement("p")
+		numItems.innerHTML = "Your cart has " + cart.length + " items in it! <i class='fas fa-arrow-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
+		if(cart.length == 1) {
+			numItems.innerText = ""
+			numItems.innerHTML = "Your cart has " + cart.length + " item in it! <i class='fas fa-arrow-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
+		}
+		shoppingCart.appendChild(numItems)
+
+		// if the cart has at least one item in it then show the price total
+		if(cart.length >= 1) {
+			// the div that holds the price total and clear cart button
+			var priceWrap = document.createElement("div")
+			priceWrap.style.width = "100%"
+			priceWrap.style.height = "50px"
+			priceWrap.style.borderBottom = "1px solid black"
+			// Clear cart button
+			var clearCart = document.createElement("button")
+			// price total element
+			var priceTotal = document.createElement("h5")
+			// Styling for price total
+			priceTotal.id = "cartTotal"
+			priceTotal.style.paddingTop = "10px"
+			priceTotal.style.paddingRight = "0"
+			priceTotal.style.textAlign = "right"
+			priceTotal.style.display = "inline-block"
+			// styling for clear cart button
+			clearCart.classList.add("clear-cart")
+			clearCart.style.marginTop = "10px"
+			clearCart.style.textAlign = "left"
+			clearCart.style.marginLeft = "40px"
+			clearCart.style.padding = "5px"
+			clearCart.style.border = "1px solid black"
+			clearCart.setAttribute("onclick", "clearCart()")
+			// appending the elements to the document
+			shoppingCart.appendChild(priceWrap)
+			priceWrap.appendChild(clearCart)
+			priceWrap.appendChild(priceTotal)
+			// addding text to the elements to display correct information
+			clearCart.innerText = "Clear Cart"
+			priceTotal.innerHTML = "<h5 class='cart-total-text'>Total =</h5><h5 class='cart-total-num'>$" + total + "</h5>"
+			
+		}
+		
+		// a for loop to add the board to the cart
+		for(var i = 0; i < cart.length; i++) {
+			var newBoardCart = document.createElement("div")
+			newBoardCart.style.textAlign = "right"
+			newBoardCart.classList.add("board-cart")
+			newBoardCart.innerHTML = cart[i]
+			shoppingCart.appendChild(newBoardCart)
+		}
 	}
 }
 
@@ -255,7 +292,7 @@ function showCart() {
 		shoppingCart.innerHTML = ""
 		var newP = document.createElement("p")
 		newP.style.minWidth = "300px"
-		newP.innerHTML = "Your cart has " + cart.length + " items in it! <i class='animated bounce fas fa-chevron-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
+		newP.innerHTML = "Your cart has " + cart.length + " items in it! <i class='animated bounce fas fa-arrow-circle-up fa-2x cart-icon'" + "onclick=" + "hide('shoppingCart')" + "></i>"
 		shoppingCart.appendChild(newP)
 	}
 	// shoppingCart.style.display = "block"
@@ -339,7 +376,7 @@ function hide(id) {
 
 // Dynamic hamburger Icon for navigation
 $(document).ready(function(){
-	$('#nav-icon1, #home, #cart, #sell').click(function(){
+	$('#home, #cart, #sell, #dropMenu').click(function(){
 		$('#nav-icon1').toggleClass('open')
 	})
 })

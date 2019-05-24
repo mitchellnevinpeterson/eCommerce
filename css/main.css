@@ -84,7 +84,7 @@ i:hover {
 }
 
 .navbar-toggler {
-	height: 60px;
+	border: none;
 }
 
 /*adding some margin the button*/
@@ -277,7 +277,7 @@ div#shoppingCart {
 
 #shoppingCart p:nth-child(1) {
 	display: inline-block;
-	padding: 10px 10px 0 70px;
+	padding: 15px 100px 0 10px;
 	text-align: center;
 	border-bottom: 1px solid #000;
 	width: 100%;
@@ -306,18 +306,26 @@ div#shoppingCart {
 
 /*changing the display of the child elements of the shopping cart*/
 div.board-cart * {
-	display: inline;
+	display: inline-block;
+	vertical-align: middle;
 	right: 10px;
 	padding: 0 7.5px;
 }
 
-/*aligning the price to the right*/
-div.board-cart h5.priceH5 {
-	padding-top: 10px;
-	float: right;
-	line-height: 90px;
-	vertical-align: center;
+div.board-cart h4,
+div.board-cart h5,
+div.board-cart h6 {
+	width: 16%;
 }
+
+/*aligning the price to the right*/
+/*div.board-cart h5.priceH5 {
+	padding-top: 0;
+	float: right;
+	line-height: 113px;
+	vertical-align: center;
+	margin: 0;
+}*/
 
 /*changing the size of the snowboard img*/
 div.board-cart img {
@@ -331,7 +339,43 @@ div.board-cart button {
 
 /*adding padding to the left side of the icon to hide cart*/
 .cart-icon {
-	padding-left: 40px
+	padding-left: 40px;
+}
+
+.cart-icon-fixed{
+	position: fixed;
+    top: 65px;
+    right: 30px;
+}
+
+.clear-cart{
+	display: inline-block;
+	border-radius: 7px;
+	position: absolute;
+	background-color: #cc0000;
+	color: #fff;
+	top: 5px;
+	right: 100px;
+}
+
+/*adding hover effect on the clear cart button*/
+.clear-cart:hover {
+	background-color: grey;
+	color: #fff;
+	cursor: no-drop;
+}
+
+/*styling the text "total" inside the shopping cart*/
+.cart-total-text {
+	color: #000; 
+	display: inline-block; 
+	padding: 0;
+}
+
+/*styling the total price "number" inside the shopping cart*/
+.cart-total-num {
+	display:inline-block; 
+	padding: 0 0 0 20px;
 }
 
 /*-----------------------------------------------------------
@@ -345,7 +389,7 @@ div.board-cart button {
 	border-bottom: 2px solid #000;
 }
 
-input{
+input {
 	box-shadow: -1px 2px 2px #999;
 	border-radius: 2px;
 	border: 1px solid #999;
@@ -353,6 +397,92 @@ input{
 
 section {
 	background-color: #fff;
+}
+
+/*-----------------------------------------------------------
+=============Footer Section========================
+-----------------------------------------------------------*/
+
+#footer {
+	/*background-color: #000;*/
+	color: #fff;
+	text-align: center;
+	border-top: 5px solid #fff;
+}
+
+#myLogo {
+	height: 16px;
+	margin-bottom: 12px;
+	margin-right: 3px;
+}
+
+.footer {
+  text-align: center;
+  padding-bottom: 40px;
+  overflow: hidden;
+  width: 100%;
+  background: #222;
+}
+.footer .top-text {
+  background-color: #fff;
+  display: inline-block;
+  top: 0px;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  color: #000;
+  border-bottom-left-radius: 5px;
+  -moz-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -moz-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+}
+.footer .copyright h6 {
+  font-family: "Lato", helvetica, sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 20px;
+}
+.footer .links ul {
+  padding-left: 0px;
+  list-style: none;
+}
+.footer .links .social-icons {
+  font-size: 16px;
+  text-align: center;
+}
+.footer .links .social-icons .circle {
+	border: 1px solid #fff;
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	line-height: 2.3;
+	margin: 0px 7.5px;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	background: rgba(0, 0, 0, 0.2);
+}
+.footer .links .social-icons .circle .fab {
+	color: #fff;
+	margin: 0 auto;
+	line-height: 35px;
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+}
+
+.footer .links .social-icons .circle:hover .fab {
+	color: grey;
 }
 
 /*-----------------------------------------------------------
@@ -368,6 +498,10 @@ section {
 		margin-top: 70px;
 	}
 
+	.snowboard-wrap {
+		padding-top: 5px!important;
+	}
+
 	div.board-cart * {
 		display: block;
 		text-align: center;
@@ -381,11 +515,23 @@ section {
 	vertical-align: none;
 	}
 
+	div.board-cart h4,
+	div.board-cart h5,
+	div.board-cart h6 {
+		width: 100%;
+	}
+
+	#shoppingCart {
+		min-width: 290px;
+	}
+
 	#shoppingCart p:nth-child(1) {
 	padding: 50px 10px 0 10px;
-	height: 80px;
+	height: 85px;
 	text-align: center;
 	}
+
+	
 	
 }
 /*Navbar Collapse*/
